@@ -1,0 +1,151 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 120rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(3.2rem, 8vw, 6.4rem);
+  padding: 4.8rem;
+}
+
+button {
+  background-color: transparent;
+  border: 1rem solid var(--button-color, #000);
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+/*Button One*/
+.button-one {
+  --button-color: #333;
+}
+
+.button-one .line {
+  transform-origin: center;
+  transition: y 300ms ease-in 300ms, transform 300ms ease-in, opacity 0ms 300ms;
+}
+
+.button-one[aria-expanded="true"] .line {
+  transition: y 300ms ease-in, transform 300ms ease-in 300ms, opacity 0ms 300ms;
+}
+
+.button-one[aria-expanded="true"] :is(.top, .bottom) {
+  y: 45;
+}
+
+.button-one[aria-expanded="true"] .top {
+  transform: rotate(45deg);
+}
+
+.button-one[aria-expanded="true"] .middle {
+  opacity: 0;
+}
+
+.button-one[aria-expanded="true"] .bottom {
+  transform: rotate(-45deg);
+}
+
+/*Button Two*/
+.button-two {
+  --button-color: #232;
+}
+.button-two .line {
+  animation: to-open-icon 1s forwards;
+}
+
+.button-two[aria-expanded="true"] .line {
+  animation: to-close-icon 1s forwards;
+}
+
+.button-two .hamburger {
+  transition: transform 800ms 100ms;
+}
+
+.button-two[aria-expanded="true"] .hamburger {
+  transform: rotate(1turn);
+}
+
+.button-two[aria-expanded="true"] .line.top {
+  --rotation: -45deg;
+  transform-origin: 6.5rem 4.5rem;
+}
+
+.button-two[aria-expanded="true"] .line.bottom {
+  --rotation: 45deg;
+  transform-origin: 6rem 5.5rem;
+}
+
+@keyframes to-close-icon {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  40% {
+    stroke-dashoffset: 79.9;
+  }
+  60% {
+    stroke-dashoffset: 79.9;
+    rotate: var(--rotation);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    rotate: var(--rotation);
+  }
+}
+
+@keyframes to-open-icon {
+  0% {
+    stroke-dashoffset: 0;
+    rotate: var(--rotation);
+  }
+  40% {
+    stroke-dashoffset: 79.9;
+    rotate: var(--rotation);
+  }
+  60% {
+    stroke-dashoffset: 79.9;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/*Button Three*/
+.button-three {
+  --button-color: #000;
+  overflow: hidden;
+}
+
+.button-three .hamburger {
+    transition: transform 1s;
+}
+
+.button-three[aria-expanded="true"] .hamburger {
+  transform: translate(1rem, -1rem) rotate(0.125turn);
+}
+
+.button-three .line {
+  stroke-dasharray: 60 31 60 300;
+  transition: 1s;
+}
+
+.button-three[aria-expanded="true"] .line {
+  stroke-dasharray: 60 105 60 300;
+  stroke-dashoffset: -90;
+}
